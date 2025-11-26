@@ -65,7 +65,7 @@ done
 CTID_CONFIG_PATH="/etc/pve/lxc/${CTID}.conf"
 
 # Add tunnel device using next available device number
-NEXT_DEV=$(grep -oP '^dev\K[0-9]+' "$CTID_CONFIG_PATH" | sort -n | tail -1)
+NEXT_DEV=$(grep -oP '^dev\K[0-9]+' "$CTID_CONFIG_PATH" | sort -n | tail -1 || true)
 NEXT_DEV=${NEXT_DEV:-"-1"}  # Default to -1 if no devices exist
 NEXT_DEV=$((NEXT_DEV + 1))
 pct set $CTID --dev${NEXT_DEV} /dev/net/tun
